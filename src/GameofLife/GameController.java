@@ -6,7 +6,7 @@ public class GameController {
   private GameBoard model;
   private GameView view;
   private boolean running = false;
-  private final int delay = 10000; // Delay between generations in milliseconds
+  private final int delay = 5000; // Delay between generations in milliseconds
 
   public GameController(GameBoard model, GameView view) {
     this.model = model;
@@ -47,9 +47,5 @@ public class GameController {
     return model.getCell(x, y).isAlive();
   }
 
-  public void setInitialConfiguration(boolean[][] seed) {
-    model.initialize(seed);
-    SwingUtilities.invokeLater(() -> view.updateView(model));
-  }
 }
 
