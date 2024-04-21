@@ -21,11 +21,17 @@ public class GameView extends JFrame {
   }
 
   private void promptBoardSize() {
-    String input = JOptionPane.showInputDialog(this, "Enter the size of the board (N x N):");
+    String input = JOptionPane.showInputDialog(this, "Enter the size of the board (N x N, max 100):");
     if (input != null && !input.trim().isEmpty()) {
       try {
-        size = Integer.parseInt(input.trim());
-        initializeUI(size);
+        int size = Integer.parseInt(input.trim());
+        if (size > 0 && size <= 100) {
+          size = size;  // Store grid size as an integer
+          initializeUI(size);
+        } else {
+          JOptionPane.showMessageDialog(this, "Please enter a number between 1 and 100.");
+          promptBoardSize(); // Re-request if input is out of bounds
+        }
       } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Please enter a valid integer.");
         promptBoardSize(); // Re-request if input is invalid
